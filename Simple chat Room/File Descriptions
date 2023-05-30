@@ -1,0 +1,15 @@
+This is a simple chat application implemented using sockets in Python. It allows clients to connect to a server and exchange messages in real-time.
+
+Prerequisites
+Python 3.x
+tkinter (for the client GUI)
+Usage
+Start the server by running the server.py script:
+
+$ python server.py
+Start the client application by running the client.py script:
+
+$ python client.py 
+File Descriptions
+server.py: The server-side script that handles client connections and message broadcasting.
+client.py: The client-side script that provides a GUI interface for the chat application.
