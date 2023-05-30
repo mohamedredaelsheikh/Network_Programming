@@ -1,0 +1,43 @@
+The code is an example of a time server implemented in Python using the socket module. A time server is a server program that provides the current date and time to clients upon request. Let's go through the code and understand its functionality:
+
+1. Importing the necessary modules:
+   ```python
+   import socket
+   import datetime
+   ```
+
+2. Creating a socket object:
+   ```python
+   S = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+   ```
+   This line creates a TCP socket object `S` using the `socket` module's `socket` function. It uses the `AF_INET` address family and `SOCK_STREAM` socket type, which corresponds to TCP/IP.
+
+3. Binding the socket to a specific address and port:
+   ```python
+   S.bind((socket.gethostname(), 1025))
+   ```
+   This line binds the socket to the current machine's hostname (obtained using `socket.gethostname()`) and port number 1025. The `bind` method associates the socket with the specified address and port.
+
+4. Listening for incoming connections:
+   ```python
+   S.listen(5)
+   ```
+   This line sets the socket to listen for incoming connections. The argument `5` specifies the maximum number of queued connections that the server can handle.
+
+5. Obtaining the current date and time:
+   ```python
+   dateAsString = str(datetime.datetime.now())
+   x = dateAsString.encode()
+   ```
+   These lines use the `datetime` module to get the current date and time as a string. The obtained string is then encoded into bytes using the `encode` method.
+
+6. Accepting client connections and sending the date/time:
+   ```python
+   while True:
+       clt, adr = S.accept()
+       print(f"Connection to {adr} is established")
+       clt.send(x)
+   ```
+   This `while` loop runs indefinitely, accepting client connections using the `accept` method. When a client connects, it returns a new socket object (`clt`) representing the connection and the client's address (`adr`). The server then prints a message indicating the connection establishment. Finally, the current date and time (`x`) are sent to the client using the `send` method of the client socket.
+
+In summary, this code creates a basic time server that listens for incoming connections, accepts client connections, and sends the current date and time to the connected clients.
